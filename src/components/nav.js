@@ -23,8 +23,17 @@ const [isLocOpen, setIsLocOpen] = useState(false)
 
 const [isMenuOpen, setIsMenuOpen] = useState(false)
 const [isInputOpen, setIsInputOpen] = useState(false)
+
+//to check if any of the states are true so that clicking on nav can close them
+
+const isTrue =()=>{
+if(isLocOpen) setIsLocOpen(!isLocOpen)
+if(isMenuOpen) setIsMenuOpen(!isMenuOpen)
+if(isInputOpen) setIsInputOpen(!isInputOpen)
+}
+
 return(
-    <StyledNav>
+    <StyledNav onClick={isTrue}>
 <TimeLoc>
 <div className='time'>
     <img src={clock} alt="Clock" />
@@ -92,6 +101,17 @@ display:flex ;
 padding:0 30px ;
 box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.25);
 justify-content:space-between ;
+position:fixed ;
+`
+
+const DisMenus = styled(motion.div)`
+width:100vw ;
+height:100vh ;
+position:absolute ;
+background:none;
+top:0 ;
+left:0 ;
+margin-top:50px ;
 `
 
 const TimeLoc = styled(motion.div)`
@@ -101,6 +121,7 @@ height:auto ;
 display:flex ;
 justify-content:space-between;
 align-items:center ;
+font-weight:500 ;
 
 ul{
     list-style:none ;
@@ -118,9 +139,10 @@ ul{
     margin-top:40px ;
     margin-left:118px ;
     box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.25);
+    
     li{
         font-size:18px ;
-        font-weight:bold ;
+
     }
 }
 
@@ -137,7 +159,7 @@ ul{
 }
 
 .line{
-    width:3px ;
+    width:2px ;
     height: 18px;
     background: #000;
 }
