@@ -7,14 +7,50 @@ import styled from "styled-components";
 
 import { Link } from 'react-router-dom';
 
+import { pageTransition } from '../components/animation';
+
+import {useNavigate} from 'react-router-dom';
+
+
+//link to where user will go
+let link = "/signup"
+
+
+//to rectify else case 
+const changeInput = () =>{
+    document.getElementById('email').classList.remove("redded")
+}
+
+
 const SignUp = () =>{
+    //to navigate to a page
+const navigate = useNavigate();
+//func to test if target is email
+const isvalidEmail = () => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let email=  document.getElementById('email').value
+    if ( re.test(email) ) {
+        // this is a valid email address
+       navigate('/register')
+    }
+    else {
+        // invalid email
+        document.getElementById('email').classList.add("redded")
+    }
+
+}
+
+
+
     return(
-        <Content>
-        <Register>
+        <Content >
+        <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
 <h1>sign up</h1>
-<input type="text" placeholder='E-mail'/>
-<button>next</button>
+<input id='email' type="email" placeholder='E-mail' onClick={changeInput}/>
+<button onClick={isvalidEmail}>
+<Link to={link}>next</Link>
+</button>
 <Link to="/">
 <span id='linkLogin'>You already have an account?</span>
 </Link>
@@ -69,18 +105,34 @@ padding-left:16px ;
 margin-top:50px ;
 }
 
+.redded{
+    border-bottom:2px solid red ;
+    color:red ;
+    content:"" ;
+    &::placeholder{
+        color: red;
+        content:"Please put in a proper e-mail" ;
+    }
+}
+
 button{
     font-family: 'Playfair Display', serif;
     text-transform:uppercase ;
-    background:black ;
-    border:none ;
     border-radius: 7px;
     width:300px ;
-    height:55px ;
-    color:#F2F2F2 ;
-    font-size:25px ;
-    cursor: pointer;
+    height:40px ;
+    font-size:18px ;
     margin-top:60px ;
+
+    a{
+        color:#F2F2F2 ;
+    }
+
+    &:hover{
+        a{
+            color:black ;
+        }
+    }
 }
 a{
     margin-top:40px ;

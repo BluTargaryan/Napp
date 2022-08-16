@@ -40,3 +40,37 @@ export const inputDisplayClick = {
           }
     }
 }
+
+export const pageTransition = {
+    hidden: { opacity: 0,
+    x:100},
+    show:{
+        opacity:1,
+        x:0,
+        transition:{
+            ease:"easeIn",
+            duration:.3
+        }
+    },
+    exit:{
+        opacity: 0,
+    x:100
+    }
+}
+
+export const pageTransitionRegister = {
+    hidden: { opacity: 0,
+    x:-100},
+    show:{
+        opacity:1,
+        x:0,
+        transition:{
+            ease:"easeIn",
+            duration:.3
+        }
+    },
+    exit:{
+        opacity: 0,
+    x:-100
+    }
+}

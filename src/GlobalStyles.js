@@ -10,12 +10,26 @@ const GlobalStyles = createGlobalStyle`
 body{
     width:100% ;
     overflow-x:hidden ;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight:400 ;
 }
 
 input{
     outline:none ;
+}
+
+button{
+    background:black ;
+    border:none ;
+    cursor: pointer;
+    border-radius: 7px;
+    color:#F2F2F2 ;
+    &:hover{
+        border:2px solid #000 ;
+        background:none ;
+        color:black ;
+        transition:.2s ease-in ;
+    }
 }
 
 a{

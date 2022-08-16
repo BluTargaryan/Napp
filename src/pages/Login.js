@@ -6,11 +6,17 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 
+import { pageTransition} from '../components/animation';
+
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () =>{
+
+    const navigate = useNavigate()
     return(
-        <Content>
-        <Register>
+        <Content >
+        <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
 <h1>login</h1>
 <input type="text" placeholder='Username'/>
@@ -18,7 +24,9 @@ const Login = () =>{
 <span id='forgotPassword'>
     <span>Forgot password?</span>
 </span>
-<button>next</button>
+<button onClick={()=>navigate('/home')}>
+    next
+    </button>
 <Link to="/signup">
 <span id='linkLogin'>You don't have an account?</span>
 </Link>
@@ -93,15 +101,17 @@ span{
 button{
     font-family: 'Playfair Display', serif;
     text-transform:uppercase ;
-    background:black ;
-    border:none ;
-    border-radius: 7px;
     width:300px ;
-    height:55px ;
-    color:#F2F2F2 ;
-    font-size:25px ;
-    cursor: pointer;
+    height:40px ;
+    font-size:18px ;
     margin-top:40px ;
+    color:#f2f2f2 ;
+
+    &:hover{
+        border:2px solid black ;
+        background:none ;
+            color:black ;
+    }
 }
 
 a{

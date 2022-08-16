@@ -14,8 +14,9 @@ import styled from "styled-components";
 import { displayClick } from './animation'
 import { displayMenuClick } from './animation'
 import { inputDisplayClick } from './animation'
+import { Link } from 'react-router-dom'
 
-
+import {useNavigate} from 'react-router-dom';
 
 const Nav = () =>{
     //state to see if loc menu is open 
@@ -32,8 +33,17 @@ if(isMenuOpen) setIsMenuOpen(!isMenuOpen)
 if(isInputOpen) setIsInputOpen(!isInputOpen)
 }
 
+ //to navigate to a page
+ const navigate = useNavigate();
+ const link= "/"
+
+ const logoToLink = ()=>{
+    navigate(link)
+ }
+
+
 return(
-    <StyledNav onClick={isTrue}>
+    <StyledNav >
 <TimeLoc>
 <div className='time'>
     <img src={clock} alt="Clock" />
@@ -55,7 +65,7 @@ variants={displayClick}>
 </motion.ul>
     </TimeLoc>
 
-    <Logo>
+    <Logo onClick={logoToLink}>
 <img src={study} alt="newspaper icon" />
 <span>Napp</span>
     </Logo>  
@@ -92,10 +102,11 @@ variants={displayMenuClick}>
 }
 
 const StyledNav= styled(motion.nav)`
+font-family: 'Inter', sans-serif;
 width:100%;
 height:50px ;
 position:absolute ;
-z-index:1;
+z-index:3;
 background:#f2f2f2 ;
 display:flex ;
 padding:0 30px ;
