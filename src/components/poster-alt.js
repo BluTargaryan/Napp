@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 
-import eye from '../media/eye.png'
-import menu from '../media/menu-vert.png'
+import eye from '../media/eye-blk.png'
+import menu from '../media/menu-vertblk.png'
 import placeholder from '../media/placeholder.jpg'
 
-const Poster = () =>{
+const PosterAlt = () =>{
 
     return(
         <Content>
@@ -31,6 +31,7 @@ margin-top:20px ;
 display:flex ;
 align-items:center ;
 position:relative ;
+color:black ;
 
 #views{
 width:55px ;
@@ -38,11 +39,10 @@ height: 25px;
 display:flex ;
 align-items:center ;
 justify-content:space-around ;
-border-right:1px solid #f2f2f2 ;
-border-bottom:2px solid #f2f2f2 ;
+border-right:1px solid black ;
+border-bottom:2px solid black ;
 
 span{
-color:#f2f2f2 ;
 font-size:16px ;
 }
     img{
@@ -64,7 +64,6 @@ font-size:16px ;
     font-size:18px ;
     font-weight:600 ;
     font-family: 'Playfair Display', serif;
-    color:#f2f2f2 ;
     padding:0 ;
     margin-left:15px ;
 }
@@ -78,4 +77,4 @@ font-size:16px ;
 }
 `
 
-export default Poster;
+export default PosterAlt;

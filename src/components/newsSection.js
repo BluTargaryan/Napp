@@ -2,8 +2,11 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
+
 import HalfSection from "./halfSection";
 import ThirdSection from "./thirdSection";
+import ThirdSectionImg from "./thirdSectionImg";
+import ThirdSectionBlk from "./thirdSectionBlk";
 
 const NewsSection = () =>{
 
@@ -11,14 +14,14 @@ const NewsSection = () =>{
         <Main>
             <HalfSection/>
             <ThirdSection/>
-            <ThirdSection/>
+            <ThirdSectionImg/>
         </Main>
     )
 }
 
 const Main = styled(motion.div)`
 width:100% ;
-height:630px ;
+height:580px ;
 background:#f2f2f2 ;
 display:flex ;
 `

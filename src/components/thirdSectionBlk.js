@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-import PosterAlt from "./poster-alt";
-import SectionHeaderAlt from "./sectionHeaderAlt";
+import Poster from "./poster";
+import SectionHeader from "./sectionHeader";
 
 import clock from '../media/clock.png'
 import bw from '../media/bw.png'
@@ -12,7 +12,7 @@ const ThirdSection = () =>{
 
     return(
         <Content>
-            <PosterAlt/>
+            <Poster/>
             <div id="hero">
             <h1 id="hero-txt">Cinemas Ban Groups Watching 'Minions: The Rise of Gru' in Formal Attire</h1>
             <div id="img" style={{ backgroundImage: `url(${bw})` }}/>
@@ -36,7 +36,8 @@ const ThirdSection = () =>{
 const Content = styled(motion.div)`
 width:25% ;
 height:100% ;
-background:#f2f2f2 ;
+background:black ;
+color:#f2f2f2 ;
 
 #hero{
     display:flex ;

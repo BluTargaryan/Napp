@@ -12,6 +12,9 @@ body{
     overflow-x:hidden ;
     font-family: 'Playfair Display', serif;
     font-weight:400 ;
+    &::-webkit-scrollbar {
+    display: none;
+}
 }
 
 input{

@@ -2,20 +2,19 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-import PosterAlt from "./poster-alt";
-import SectionHeaderAlt from "./sectionHeaderAlt";
+import Poster from "./poster";
+import SectionHeader from "./sectionHeader";
 
-import clock from '../media/clock.png'
+import clock from '../media/clock-white.png'
 import bw from '../media/bw.png'
 
 const ThirdSection = () =>{
 
     return(
         <Content>
-            <PosterAlt/>
+            <Poster/>
             <div id="hero">
             <h1 id="hero-txt">Cinemas Ban Groups Watching 'Minions: The Rise of Gru' in Formal Attire</h1>
-            <div id="img" style={{ backgroundImage: `url(${bw})` }}/>
             <h2>Immediately following the release of Minions: The Rise of Gru, teens kicked off an interesting trend through social media.</h2>
                 <div id="Date">
                 
@@ -36,37 +35,29 @@ const ThirdSection = () =>{
 const Content = styled(motion.div)`
 width:25% ;
 height:100% ;
-background:#f2f2f2 ;
+background-color:black ;
+color:#f2f2f2 ;
 
 #hero{
     display:flex ;
     flex-direction:column ;
 margin-top:80px ;
 position: relative;
+padding-left:30px ;
 
 h2{
-    margin-top:25px ;
-    margin-left:15% ;
-    font-size:15px ;
+    font-size:14px ;
     font-weight:600 ;
-    width:80% ;
+    width:50% ;
+    margin-top:50px ;
 }
 }
 
 #hero-txt{
-    width: 85%;
+    width: 80%;
     font-size:20px ;
-    margin:0 auto ;
 }
 
-#img{
-    margin-top:50px ;
-    width:80%;
-    height: 120px;
-    background-size:cover ;
-    background-position:center ;
-    margin-left:20% ;
-}
 
 #Date{
     font-family: 'Inter', sans-serif;
@@ -75,8 +66,7 @@ h2{
         align-items:center ;
         justify-content:space-between ;
         width:140px ;
-        margin-top:45px ;
-        margin-left:30px ;
+        margin-top:130px ;
 
         img{
             width:24px ;

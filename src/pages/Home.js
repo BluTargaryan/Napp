@@ -4,11 +4,13 @@ import styled from "styled-components";
 
 //Comps
 import NewsSection from "../components/newsSection";
+import SectionHeader from "../components/sectionHeader";
 
 const Home = () =>{
 
     return(
         <Content>
+            <SectionHeader/>
             <NewsSection/>
         </Content>
     )
