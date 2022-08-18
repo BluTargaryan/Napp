@@ -11,6 +11,7 @@ import { pageTransition} from '../components/animation';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Login = () =>{
 
     const navigate = useNavigate()
@@ -20,9 +21,9 @@ const Login = () =>{
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
 <h1>login</h1>
 <input type="text" placeholder='Username'/>
-<input type="text" placeholder='Password'/>
+<input type="password" placeholder='Password'/>
 <span id='forgotPassword'>
-    <span>Forgot password?</span>
+    <span><Link to="/fp">Forgot password?</Link></span>
 </span>
 <button onClick={()=>navigate('/home')}>
     next

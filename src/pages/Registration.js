@@ -21,6 +21,26 @@ let link = "/signup"
 const Registration = () =>{
     //to navigate to a page
 const navigate = useNavigate();
+    //to rectify else case 
+    const changeInput = () =>{
+        document.getElementById('confpassword').classList.remove("redded")
+    }
+   //func to test if passwordis equal to confirm password
+   const isvalidPassword = () => {
+    let pass=  document.getElementById('password').value
+    let conf=  document.getElementById('confpassword').value
+    if ( pass===conf ) {
+        // this is a valid email address
+       navigate('/home')
+    }
+    else {
+        // invalid email
+        document.getElementById('password').value= ""
+        document.getElementById('confpassword').value= ""
+        document.getElementById('confpassword').placeholder="Please make sure both passwords are equal"
+        document.getElementById('confpassword').classList.add("redded")
+    }
+}
     return(
         <Group>
             <BG/>
@@ -41,9 +61,9 @@ const navigate = useNavigate();
 <h1 id='more-header'>More details</h1>
 <input type="text" placeholder='Name'/>
 <input type="text" placeholder='Preferred username'/>
-<input type="text" placeholder='Password'/>
-<input type="text" placeholder='Confirm password'/>
-<button onClick={()=>navigate('/home')}>FINISH</button>
+<input type="password" placeholder='Password' id='password'/>
+<input type="password" placeholder='Confirm password' id='confpassword'/>
+<button onClick={isvalidPassword}>FINISH</button>
             </Content>
         </Group>
     )
@@ -77,6 +97,15 @@ box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
 display:flex ;
 flex-direction:column ;
 align-items:center ;
+
+.redded{
+    border-bottom:2px solid red ;
+    color:red ;
+    content:"" ;
+    &::placeholder{
+        color: red;
+    }
+}
 
 h1{
     font-weight:600 ;

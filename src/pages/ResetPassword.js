@@ -4,59 +4,54 @@ import bw from '../media/bw.png'
 //motion and styled
 import { motion } from "framer-motion";
 import styled from "styled-components";
-
 import { Link } from 'react-router-dom';
 
-import { pageTransition } from '../components/animation';
+import { pageTransition} from '../components/animation';
 
-import {useNavigate} from 'react-router-dom';
-
-
-//link to where user will go
-let link = "/signup"
+import { useNavigate } from 'react-router-dom';
 
 
-//to rectify else case 
+
+export const ResetPassword = () =>{
+
+    const navigate = useNavigate()
+
+
+    //to rectify else case 
 const changeInput = () =>{
-    document.getElementById('email').classList.remove("redded")  
+    document.getElementById('confpassword').classList.remove("redded")
 }
-
-
-const SignUp = () =>{
-    //to navigate to a page
-const navigate = useNavigate();
-//func to test if target is email
-const isvalidEmail = () => {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let email=  document.getElementById('email').value
-    if ( re.test(email) ) {
+    //func to test if passwordis equal to confirm password
+const isvalidPassword = () => {
+    let pass=  document.getElementById('password').value
+    let conf=  document.getElementById('confpassword').value
+    if ( pass===conf ) {
         // this is a valid email address
-       navigate('/register')
+       navigate('/home')
     }
     else {
         // invalid email
-        document.getElementById('email').value=""
-        document.getElementById('email').placeholder="Please put in a correct e-mail address"
-        document.getElementById('email').classList.add("redded")
-        
+        document.getElementById('password').value= ""
+        document.getElementById('confpassword').value= ""
+        document.getElementById('confpassword').placeholder="Please make sure both passwords are equal"
+        document.getElementById('confpassword').classList.add("redded")
     }
-
 }
-
-
-
     return(
         <Content >
         <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
-<h1>sign up</h1>
-<input id='email' type="email" placeholder='E-mail' onClick={changeInput}/>
-<button onClick={isvalidEmail}>
-<Link to={link}>next</Link>
-</button>
-<Link to="/">
-<span id='linkLogin'>You already have an account?</span>
-</Link>
+<h1>new password</h1>
+<input type="password" placeholder='Password' id='password'/>
+<input type="password" placeholder='Confirm password' id='confpassword' onClick={changeInput}/>
+<span id='forgotPassword'>
+    <span><Link to="/fp">Last chance. Remembered it yet?</Link></span>
+</span>
+<button onClick={isvalidPassword}>
+    set new password
+    </button>
+
+
         </Register>
         </Content>
     )
@@ -87,14 +82,14 @@ align-items:center ;
     width:400px ;
     text-align:center ;
     font-weight:600 ;
-    margin-top: 60px;
+    margin-top: 40px;
     font-size:18px ;
 }
 
 h1{
     text-transform:uppercase ;
 font-weight:600 ;
-margin-top:70px ;
+margin-top:50px ;
 }
 
 input{
@@ -105,7 +100,7 @@ border:none ;
 border-bottom:2px solid black ;
 font-size:20px ;
 padding-left:16px ;
-margin-top:50px ;
+margin-top:40px ;
 }
 
 .redded{
@@ -114,34 +109,49 @@ margin-top:50px ;
     content:"" ;
     &::placeholder{
         color: red;
+        content:"Must be the same as the password above" ;
     }
+}
+
+#forgotPassword{
+width:440px ;
+padding-left:16px ;
+margin-top:10px ;
+span{
+    float:left ;
+    color:#363636 ;
+    font-weight:600 ;
+    cursor: pointer;
+
+    &:hover{
+        border-bottom:2px solid #363636 ;
+    }
+}
 }
 
 button{
     font-family: 'Playfair Display', serif;
     text-transform:uppercase ;
-    border-radius: 7px;
     width:300px ;
     height:40px ;
     font-size:18px ;
     margin-top:60px ;
-
-    a{
-        color:#F2F2F2 ;
-    }
+    color:#f2f2f2 ;
 
     &:hover{
-        a{
+        border:2px solid black ;
+        background:none ;
             color:black ;
-        }
     }
 }
+
 a{
     margin-top:40px ;
 }
 #linkLogin{
     font-weight:600 ;
     font-size:18px ;
+    
     cursor: pointer;
 
     &:hover{
@@ -149,7 +159,7 @@ a{
     }
 }
 `
-export default SignUp
+
 
 
 

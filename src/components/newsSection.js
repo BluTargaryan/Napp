@@ -22,7 +22,7 @@ const NewsSection = () =>{
 const Main = styled(motion.div)`
 width:100% ;
 height:580px ;
-background:#f2f2f2 ;
+background:black;
 display:flex ;
 `
 

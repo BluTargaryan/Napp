@@ -6,12 +6,18 @@ import Poster from "./poster";
 import SectionHeader from "./sectionHeader";
 
 import clock from '../media/clock-white.png'
-import bw from '../media/bw.png'
+
+import { miniSectionReveal } from "./animation";
+
+import { useScroll } from "./scroll";
+
+import blue from '../media/blue.png'
 
 const ThirdSection = () =>{
-
+    const[element,controls] = useScroll();
     return(
-        <Content>
+       
+        <Content variants={miniSectionReveal} initial="hidden" animate={controls} ref={element} style={{ background: `linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${blue})`, backgroundSize:`cover`, backgroundPosition:`center center`, backgroundRepeat:`no-repeat`}}>
             <Poster/>
             <div id="hero">
             <h1 id="hero-txt">Cinemas Ban Groups Watching 'Minions: The Rise of Gru' in Formal Attire</h1>

@@ -2,15 +2,18 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-import SectionHeader from "./sectionHeader";
 import Poster from "./poster";
 
 import clock from '../media/clock-white.png'
+import minion from '../media/minions.png'
+import { miniSectionReveal } from "./animation";
+
+import { useScroll } from "./scroll";
 
 const HalfSection = () =>{
-
+    const[element,controls] = useScroll();
     return(
-        <Content>
+        <Content variants={miniSectionReveal} initial="hidden" animate={controls} ref={element} style={{ background: `linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${minion})`, backgroundSize:`cover`, backgroundPosition:`center center` }}>
             <Poster/>
 
             <div id="hero">

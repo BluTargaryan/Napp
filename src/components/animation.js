@@ -48,6 +48,7 @@ export const pageTransition = {
         opacity:1,
         x:0,
         transition:{
+            type: "spring",
             ease:"easeIn",
             duration:.3
         }
@@ -65,6 +66,7 @@ export const pageTransitionRegister = {
         opacity:1,
         x:0,
         transition:{
+            type: "spring",
             ease:"easeIn",
             duration:.3
         }
@@ -73,4 +75,37 @@ export const pageTransitionRegister = {
         opacity: 0,
     x:-100
     }
+}
+
+export const homePageTransition = {
+    hidden: { opacity: 0,
+    y:100},
+    show:{
+        opacity:1,
+        y:0,
+        transition:{
+            type: "spring",
+            ease:"easeIn",
+            duration:.6,
+            staggerChildren: 0.2,
+            when: "beforeChildren",
+        }
+    },
+    exit:{
+        opacity: 0,
+    y:-100
+    }
+}
+
+export const miniSectionReveal = {
+    hidden: { opacity: 0, scale: 0.9 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "tween",
+        ease: "easeOut",
+        duration: .4,
+      },
+    },
 }

@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 //Comps
-import NewsSection from "../components/newsSection";
-import SectionHeader from "../components/sectionHeader";
+import Section from "../components/section";
 
+import { homePageTransition } from "../components/animation";
 const Home = () =>{
 
     return(
-        <Content>
-            <SectionHeader/>
-            <NewsSection/>
+        <Content variants={homePageTransition} initial="hidden" animate="show" exit="exit">
+            <Section/>
+            <Section/>
         </Content>
     )
 }
@@ -21,6 +21,7 @@ width:100vw ;
 height:auto ;
 position:absolute ;
     top:50px ;
+    
 `
 
 export default Home;

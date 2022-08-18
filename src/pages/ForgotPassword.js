@@ -13,16 +13,16 @@ import {useNavigate} from 'react-router-dom';
 
 
 //link to where user will go
-let link = "/signup"
+let link = "/"
 
 
 //to rectify else case 
 const changeInput = () =>{
-    document.getElementById('email').classList.remove("redded")  
+    document.getElementById('email').classList.remove("redded")
 }
 
 
-const SignUp = () =>{
+const ForgotPassword = () =>{
     //to navigate to a page
 const navigate = useNavigate();
 //func to test if target is email
@@ -31,14 +31,11 @@ const isvalidEmail = () => {
     let email=  document.getElementById('email').value
     if ( re.test(email) ) {
         // this is a valid email address
-       navigate('/register')
+       navigate('/rp')
     }
     else {
         // invalid email
-        document.getElementById('email').value=""
-        document.getElementById('email').placeholder="Please put in a correct e-mail address"
         document.getElementById('email').classList.add("redded")
-        
     }
 
 }
@@ -49,13 +46,13 @@ const isvalidEmail = () => {
         <Content >
         <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
-<h1>sign up</h1>
-<input id='email' type="email" placeholder='E-mail' onClick={changeInput}/>
+<h1>forgot password?</h1>
+<input id='email' type="email" placeholder='Enter your e-mail' onClick={changeInput}/>
 <button onClick={isvalidEmail}>
 <Link to={link}>next</Link>
 </button>
 <Link to="/">
-<span id='linkLogin'>You already have an account?</span>
+<span id='linkLogin'>You remembered your password?</span>
 </Link>
         </Register>
         </Content>
@@ -114,6 +111,7 @@ margin-top:50px ;
     content:"" ;
     &::placeholder{
         color: red;
+        content:"Please put in a proper e-mail" ;
     }
 }
 
@@ -149,7 +147,7 @@ a{
     }
 }
 `
-export default SignUp
+export default ForgotPassword
 
 
 
