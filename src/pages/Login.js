@@ -10,12 +10,14 @@ import { pageTransition} from '../components/animation';
 
 import { useNavigate } from 'react-router-dom';
 
-
+import Nav from '../components/nav';
 
 const Login = () =>{
 
     const navigate = useNavigate()
     return(
+        <>
+        <Nav/>
         <Content >
         <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
@@ -34,6 +36,7 @@ const Login = () =>{
 
         </Register>
         </Content>
+        </>
     )
 }
 

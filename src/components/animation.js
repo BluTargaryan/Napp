@@ -9,15 +9,22 @@ transition: {
         display:'flex',
         top:0,
         transition: {
+            type: "spring",
+            ease:"easeIn",
             duration: 0.5
           }
-    }
+    },
+    exit:{display:'none',
+    top:-100
+    },
 }
 
 export const displayMenuClick = {
     hidden:{display:'none',
 top:-100,
 transition: {
+    type: "tween",
+    ease:"easeIn",
     duration: 0.5
   }
 },
@@ -25,6 +32,8 @@ transition: {
         display:'initial',
         top:0,
         transition: {
+            type: "spring",
+            ease:"easeIn",
             duration: 0.5
           }
     }
@@ -36,6 +45,8 @@ export const inputDisplayClick = {
     show:{
         width:"180px",
         transition: {
+            type: "spring",
+            ease:"easeIn",
             duration: 0.5
           }
     }

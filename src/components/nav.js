@@ -7,7 +7,7 @@ import placeholder from '../media/placeholder.jpg'
 import { useState } from 'react'
 
 //motion and styled
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 
 //animation
@@ -25,12 +25,15 @@ const [isLocOpen, setIsLocOpen] = useState(false)
 const [isMenuOpen, setIsMenuOpen] = useState(false)
 const [isInputOpen, setIsInputOpen] = useState(false)
 
+
+
+
 //to check if any of the states are true so that clicking on nav can close them
 
 const isTrue =()=>{
-if(isLocOpen) setIsLocOpen(!isLocOpen)
-if(isMenuOpen) setIsMenuOpen(!isMenuOpen)
-if(isInputOpen) setIsInputOpen(!isInputOpen)
+
+        if(isLocOpen) setIsLocOpen(!isLocOpen)
+        if(isMenuOpen) setIsMenuOpen(!isMenuOpen)
 }
 
  //to navigate to a page
@@ -43,7 +46,8 @@ if(isInputOpen) setIsInputOpen(!isInputOpen)
 
 
 return(
-    <StyledNav >
+    <StyledNav onClick={isTrue}>
+       
 <TimeLoc>
 <div className='time'>
     <img src={clock} alt="Clock" />
@@ -55,7 +59,6 @@ onClick={()=> setIsLocOpen(isLocOpen=>!isLocOpen)}>
     <img src={location} alt="location" />
     <span>NG</span>
 </div>
-
 <motion.ul className='loc-menu'
 animate={isLocOpen ? "show" : "hidden"}
 variants={displayClick}>
@@ -87,13 +90,14 @@ variants={displayMenuClick}>
 <h1 className='profileName'>Zee Only</h1>
 <div className='majorLine'></div>
 <ul>
-    <li>Edit profile</li>
+    <li className='mnt'><Link to='/editprof'>Edit profile</Link></li>
     <li className='minorLine'></li>
-    <li id='logout'>Log out</li>
+    <li className='mnt' id='logout'><Link to='/'>Log out</Link></li>
     <li className='minorLine Red'></li>
 </ul>
 </motion.div>
     </Search>  
+    
 </StyledNav>
 )
   
@@ -199,6 +203,9 @@ border:none ;
 background:none ;
 border-bottom:1.7px solid #000 ;
 margin-right:10px ;
+    font-family: 'Inter', sans-serif;
+    font-size:12px ;
+    font-weight:500 ;
 }
 .searchIcon{
     margin-right:10px ;
@@ -234,10 +241,12 @@ margin-right:10px ;
     ul{
         list-style:none ;
     }
+
     li{
         margin-top:18px ;
         margin-left:25px ;
         font-size:18px ;
+        
     }
     .minorLine{
         width:100% ;
@@ -246,12 +255,24 @@ margin-right:10px ;
         background-color:#000 ;
         margin-left:25px ;
     }
-    #logout{
-        color:#890000 ;
-    }
     .Red{
  background:#890000 ;
     }
+    .mnt:hover{
+        font-weight:500 ;
+    }
+.mnt:hover+.minorLine{
+    margin-left:0px ;
+    transition:.1s ease-in ;
+}
+    
+    #logout{
+        
+        a{
+            color:#890000 ;
+        }
+    }
+    
 }
 `
 export default Nav;

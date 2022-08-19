@@ -17,9 +17,9 @@ import Nav from '../components/nav';
 
 
 //link to where user will go
-let link = "/signup"
+let link = "/home"
 
-const Registration = () =>{
+export const EditProfile = () =>{
     //to navigate to a page
 const navigate = useNavigate();
     //to rectify else case 
@@ -209,4 +209,3 @@ button{
     margin-top:80px;
 }
 `
-export default Registration;
