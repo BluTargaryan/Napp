@@ -11,7 +11,7 @@ import { pageTransition } from '../components/animation';
 
 import {useNavigate} from 'react-router-dom';
 
-import Nav from '../components/nav';
+import PreNav from '../components/prenav'
 //link to where user will go
 let link = "/"
 
@@ -22,7 +22,7 @@ const changeInput = () =>{
 }
 
 
-const ForgotPassword = () =>{
+export const ForgotPassword = () =>{
     //to navigate to a page
 const navigate = useNavigate();
 //func to test if target is email
@@ -44,7 +44,7 @@ const isvalidEmail = () => {
 
     return(
         <>
-        <Nav/>
+        <PreNav/>
         <Content >
         <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
@@ -150,7 +150,7 @@ a{
     }
 }
 `
-export default ForgotPassword
+export default ForgotPassword;
 
 
 

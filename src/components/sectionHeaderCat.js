@@ -2,18 +2,18 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-import arrow from '../media/Arrow-right-white.png'
+import arrow from '../media/Arrow-left.png'
 import { Link } from "react-router-dom";
-const SectionHeader = () =>{
+
+const SectionHeader = ({link}) =>{
 
     return(
         <Content>
             <div>
-                <span>For you</span>
-                <Link to='/category'>
+            <Link to={link}>
                 <img src={arrow} alt="" />
                 </Link>
-                
+                <span><p>For you</p></span>
             </div>
         </Content>
     )
@@ -28,29 +28,32 @@ position:relative ;
 background:black ;
 
 div{
-    position:absolute ;
-    bottom:0 ;
-    right:0 ;
-    font-size:20px ;
-    font-weight:700 ;
-    height:55px ;
-    width:100% ;
-    border-bottom: 4px solid #f2f2f2 ;
-    padding-left:5% ;
     display:flex ;
     align-items:center ;
     justify-content:space-between ;
+    height:55px ;
+    width:100% ;
+    
+span{
+width: 90%;
+height:100% ;
+border-bottom: 4px solid #f2f2f2 ;
+    font-size:20px ;
+    font-weight:700 ;
+    display:flex ;
+    align-items:center ;
+}
+}
 
-    img{
-        height:35px ;
-margin-right:20px ;
-cursor: pointer;
-&:hover{
-    margin-right:18px;
+  img{
+    padding-left:20px ;
+    height: 40px;
+    &:hover{
+    padding-left:16px;
     transition:.1s ease-in ;
 }
-    }
 }
+
 `
 
 export default SectionHeader;

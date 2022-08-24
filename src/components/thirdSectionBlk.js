@@ -8,10 +8,13 @@ import SectionHeader from "./sectionHeader";
 import clock from '../media/clock.png'
 import bw from '../media/bw.png'
 
-const ThirdSection = () =>{
+import { miniSectionReveal } from "./animation";
 
+import { useScroll } from "./scroll";
+const ThirdSectionBlk = () =>{
+    const[element,controls] = useScroll();
     return(
-        <Content>
+        <Content variants={miniSectionReveal} initial="hidden" animate={controls} ref={element}>
             <Poster/>
             <div id="hero">
             <h1 id="hero-txt">Cinemas Ban Groups Watching 'Minions: The Rise of Gru' in Formal Attire</h1>
@@ -90,4 +93,4 @@ h2{
 }
 `
 
-export default ThirdSection;
+export default ThirdSectionBlk;

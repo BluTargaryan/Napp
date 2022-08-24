@@ -13,7 +13,7 @@ import { pageTransitionRegister } from '../components/animation';
 
 import {useNavigate} from 'react-router-dom';
 
-import Nav from '../components/nav';
+import PreNav from '../components/prenav';
 
 
 //link to where user will go
@@ -44,7 +44,7 @@ const navigate = useNavigate();
 }
     return(
         <>
-        <Nav/>
+        <PreNav/>
         <Group>
             <BG/>
             <Content variants={pageTransitionRegister} initial="hidden" animate="show" exit="exit">

@@ -7,9 +7,11 @@ import Home from './pages/Home';
 
 import {Route, Routes} from 'react-router-dom'
 import { AnimatePresence } from "framer-motion";
-import ForgotPassword from './pages/ForgotPassword';
+import {ForgotPassword} from './pages/ForgotPassword';
 import { ResetPassword } from './pages/ResetPassword';
 import { EditProfile } from './pages/EditProfile';
+import { Category } from './pages/Category';
+import Post from './pages/Post';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
 <Route path="/register" element={<Registration/>}/>
 <Route path="/editprof" element={<EditProfile/>}/>
 <Route path="/home" element={<Home/>}/>
+<Route path='/category' element={<Category/>}/>
+<Route path='/post' element={<Post/>}/>
 </Routes>
 </AnimatePresence>
     </div>
