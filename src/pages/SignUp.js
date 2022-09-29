@@ -12,6 +12,11 @@ import { pageTransition } from '../components/animation';
 import {useNavigate} from 'react-router-dom';
 
 import PreNav from '../components/prenav';
+
+//Firebase
+import {useState, useEffect} from 'react'
+import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
+import {db} from '../Firebase'
 //link to where user will go
 let link = "/signup"
 
@@ -22,7 +27,20 @@ const changeInput = () =>{
 }
 
 
+
 const SignUp = () =>{
+    //state for user data
+    const [users, setUsers] = useState([])
+    /* function to get all users from firestore in realtime */
+useEffect(() => {
+    const q = query(collection(db, 'users'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setUsers(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  },[])
     //to navigate to a page
 const navigate = useNavigate();
 //func to test if target is email
@@ -30,8 +48,21 @@ const isvalidEmail = () => {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let email=  document.getElementById('email').value
     if ( re.test(email) ) {
-        // this is a valid email address
-       navigate('/register')
+        // to check if email is not equal to one logged
+        
+        users.map((user) => {
+            //Remember: if unaware about state structure:use console check 
+            if((user.data.email)!==email){
+                navigate('/register',{state:{email:document.getElementById('email').value}}) 
+            }else{
+                //console.log(user.data.email)
+                // invalid email
+         document.getElementById('email').value=""
+          document.getElementById('email').placeholder="Someone has this address registered"
+          document.getElementById('email').classList.add("redded") 
+            }
+        })
+       
     }
     else {
         // invalid email

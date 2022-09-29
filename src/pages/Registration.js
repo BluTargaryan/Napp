@@ -3,11 +3,11 @@ import arrow from '../media/Arrow-right.png'
 import cloud from '../media/cloud.png'
 import placeholder from '../media/placeholder.jpg'
 import cancel from '../media/cancel.png'
-
+import React,{useState}  from "react";
 //motion and styled
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 
 import { pageTransitionRegister } from '../components/animation';
 
@@ -15,24 +15,80 @@ import {useNavigate} from 'react-router-dom';
 
 import PreNav from '../components/prenav';
 
+//Firebase
+import {db} from '../Firebase'
+import {collection, addDoc, Timestamp} from 'firebase/firestore'
+import { storage } from '../Firebase';
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+
+
 
 //link to where user will go
 let link = "/signup"
 
 const Registration = () =>{
+    //to hold img url
+const [imgUrl, setImgUrl] = useState(null);
+const [progresspercent, setProgresspercent] = useState(0);
+    //Location
+    const { state } = useLocation();
+    /* function to add new task to firestore */
+
+    const handleImage = async (e) =>{
+        //for user image
+//prevent input default
+e.preventDefault()
+const file = e.target[0]?.files[0]
+//if no file return
+    if (!file) return;
+
+    //ref to stored file
+    const storageRef = ref(storage, `files/${file.name}`);
+    //task to upload file
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on("state_changed",
+      (snapshot) => {
+        const progress =
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImgUrl(downloadURL)
+        });
+    }
+    );
+
+    }
+const handleSubmit = async () => {
+handleImage()
+
+    //check to pass details
+    try {
+      await addDoc(collection(db, 'users'), {
+        name: document.getElementById('name').value,
+        email: (state.email),
+        password: document.getElementById('password').value,
+        created: Timestamp.now()
+      })
+    } catch (err) {
+      alert(err)
+    }
+  }
     //to navigate to a page
 const navigate = useNavigate();
-    //to rectify else case 
-    const changeInput = () =>{
-        document.getElementById('confpassword').classList.remove("redded")
-    }
    //func to test if passwordis equal to confirm password
    const isvalidPassword = () => {
     let pass=  document.getElementById('password').value
     let conf=  document.getElementById('confpassword').value
     if ( pass===conf ) {
         // this is a valid email address
-       navigate('/home')
+        handleSubmit()
+       navigate('/home',{state:{name:document.getElementById('name').value}})
     }
     else {
         // invalid email
@@ -42,6 +98,7 @@ const navigate = useNavigate();
         document.getElementById('confpassword').classList.add("redded")
     }
 }
+
     return(
         <>
         <PreNav/>
@@ -55,15 +112,16 @@ const navigate = useNavigate();
               </Link>
                 </span>
                 <h1 id='upload-header'>Upload an image for your profile picture</h1>
-                <div id='upload-frame'>
+                <label id='upload-frame'>
  <img src={cloud} alt="cloud upload icon" />
-                </div>
+ <input type="file" name="file" id="file" />
+                </label>
+                {imgUrl && 
                 <span id='user-img' style={{ backgroundImage: `url(${placeholder})` }}>
-                    <img src={cancel} alt="Cancel button to remove image" />
-                    </span>
+                <img src={cancel} alt="Cancel button to remove " />
+                </span>}
 <h1 id='more-header'>More details</h1>
-<input type="text" placeholder='Name'/>
-<input type="text" placeholder='Preferred username'/>
+<input type="text" placeholder='Name' id='name'/>
 <input type="password" placeholder='Password' id='password'/>
 <input type="password" placeholder='Confirm password' id='confpassword'/>
 <button onClick={isvalidPassword}>FINISH</button>
@@ -153,6 +211,10 @@ justify-content:center ;
 border: 2px dashed #363636;
 border-radius: 10px;
 margin-top:20px ;
+
+#file{
+  display:none ;
+}
 
 img{
     width:75px ;

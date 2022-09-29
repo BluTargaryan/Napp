@@ -48,7 +48,7 @@ const isTrue =()=>{
 return(
     <StyledNav onClick={isTrue}>
 
-    <Logo onClick={logoToLink}>
+    <Logo>
 <img src={study} alt="newspaper icon" />
 <span>Napp</span>
     </Logo>  

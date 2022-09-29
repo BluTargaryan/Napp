@@ -3,7 +3,7 @@ import arrow from '../media/Arrow-right.png'
 import cloud from '../media/cloud.png'
 import placeholder from '../media/placeholder.jpg'
 import cancel from '../media/cancel.png'
-
+import { useEffect } from "react";
 //motion and styled
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -42,6 +42,8 @@ const navigate = useNavigate();
         document.getElementById('confpassword').classList.add("redded")
     }
 }
+
+
     return(
         <>
         <Nav/>
@@ -63,7 +65,6 @@ const navigate = useNavigate();
                     </span>
 <h1 id='more-header'>More details</h1>
 <input type="text" placeholder='Name'/>
-<input type="text" placeholder='Preferred username'/>
 <input type="password" placeholder='Password' id='password'/>
 <input type="password" placeholder='Confirm password' id='confpassword'/>
 <button onClick={isvalidPassword}>FINISH</button>

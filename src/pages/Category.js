@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import Nav from '../components/nav';
 //motion and styled
 import { motion } from "framer-motion";

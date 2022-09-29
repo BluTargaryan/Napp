@@ -4,19 +4,33 @@ import bw from '../media/bw.png'
 //motion and styled
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 
 import { pageTransition} from '../components/animation';
 
 import { useNavigate } from 'react-router-dom';
 
 import PreNav from '../components/prenav';
+//Firebase
+import { doc, updateDoc } from "firebase/firestore";
+import {db} from '../Firebase'
 
 export const ResetPassword = () =>{
-
+//Location
+const { state } = useLocation();
     const navigate = useNavigate()
 
-
+/* function to update document in firestore */
+const handleUpdate = async (e) => {
+    const taskDocRef = doc(db, 'users', state.id)
+    try{
+      await updateDoc(taskDocRef, {
+        password:  document.getElementById('password').value
+      })
+    } catch (err) {
+      alert(err)
+    }    
+  }
     //to rectify else case 
 const changeInput = () =>{
     document.getElementById('confpassword').classList.remove("redded")
@@ -27,7 +41,8 @@ const isvalidPassword = () => {
     let conf=  document.getElementById('confpassword').value
     if ( pass===conf ) {
         // this is a valid email address
-       navigate('/home')
+        handleUpdate()
+       navigate('/')
     }
     else {
         // invalid email
@@ -37,6 +52,7 @@ const isvalidPassword = () => {
         document.getElementById('confpassword').classList.add("redded")
     }
 }
+
     return(
         <>
         <PreNav/>
@@ -47,7 +63,7 @@ const isvalidPassword = () => {
 <input type="password" placeholder='Password' id='password'/>
 <input type="password" placeholder='Confirm password' id='confpassword' onClick={changeInput}/>
 <span id='forgotPassword'>
-    <span><Link to="/fp">Last chance. Remembered it yet?</Link></span>
+    <span><Link to="/">Last chance. Remembered it yet?</Link></span>
 </span>
 <button onClick={isvalidPassword}>
     set new password

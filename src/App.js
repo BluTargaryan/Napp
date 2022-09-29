@@ -13,7 +13,10 @@ import { EditProfile } from './pages/EditProfile';
 import { Category } from './pages/Category';
 import Post from './pages/Post';
 
+
+
 function App() {
+
   return (
     <div className="App">
       <GlobalStyles/>

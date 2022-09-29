@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom'
 
 import {useNavigate} from 'react-router-dom';
 
-const Nav = () =>{
+const Nav = ({name}) =>{
     //state to see if loc menu is open 
 const [isLocOpen, setIsLocOpen] = useState(false)
 
@@ -38,11 +38,7 @@ const isTrue =()=>{
 
  //to navigate to a page
  const navigate = useNavigate();
- const link= "/"
 
- const logoToLink = ()=>{
-    navigate(link)
- }
 
 
 return(
@@ -68,7 +64,7 @@ variants={displayClick}>
 </motion.ul>
     </TimeLoc>
 
-    <Logo onClick={logoToLink}>
+    <Logo onClick={()=>{navigate('/home',{state:{name:name}})}}>
 <img src={study} alt="newspaper icon" />
 <span>Napp</span>
     </Logo>  
@@ -87,7 +83,7 @@ src={placeholder} alt="user placeholder " />
 <motion.div className='profileMenu'
 animate={isMenuOpen ? "show" : "hidden"}
 variants={displayMenuClick}>
-<h1 className='profileName'>Zee Only</h1>
+<h1 className='profileName'>{name}</h1>
 <div className='majorLine'></div>
 <ul>
     <li className='mnt'><Link to='/editprof'>Edit profile</Link></li>

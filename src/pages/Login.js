@@ -1,6 +1,5 @@
 
 import bw from '../media/bw.png'
-
 //motion and styled
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -11,10 +10,60 @@ import { pageTransition} from '../components/animation';
 import { useNavigate } from 'react-router-dom';
 
 import PreNav from '../components/prenav'
+//Firebase
+import {useState, useEffect} from 'react'
+import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
+import {db} from '../Firebase'
+
+//to rectify else case 
+const changeInput = () =>{
+    document.getElementById('name').classList.remove("redded")  
+    document.getElementById('pw').classList.remove("redded")  
+}
 
 const Login = () =>{
+     //state for user data
+     const [users, setUsers] = useState([])
+     const navigate = useNavigate()
+  useEffect(() => {
+    window.addEventListener('popstate', function(event) {
+navigate('/')
+    });
+    //to get user data
+    const q = query(collection(db, 'users'), orderBy('created', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setUsers(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
 
-    const navigate = useNavigate()
+  }, [navigate]);
+    
+
+    //func to test if details are valid
+const isValid = () => {
+let name = document.getElementById('name').value
+let password = document.getElementById('pw').value
+//check if data matches details provided
+users.map((user) => {
+    
+    if((user.data.name!==name)&&(user.data.password!==password)){
+         // invalid details
+        
+         document.getElementById('name').value= ""
+         document.getElementById('pw').value= ""
+         document.getElementById('name').placeholder="Invalid e-mail"
+         document.getElementById('pw').placeholder="Invalid password"
+         document.getElementById('name').classList.add("redded")
+         document.getElementById('pw').classList.add("redded")
+        
+    }else{
+        navigate('/home',{state:{name:name}})
+    }
+    return 0
+})
+}
     return(
         <>
         <PreNav/>
@@ -22,12 +71,12 @@ const Login = () =>{
         <Register variants={pageTransition} initial="hidden" animate="show" exit="exit">
 <span id='hero-text'>Welcome to Napp, the world’s first free, no ads, news website.</span>
 <h1>login</h1>
-<input type="text" placeholder='Username'/>
-<input type="password" placeholder='Password'/>
+<input id='name' type="text" placeholder='Username'  onClick={changeInput}/>
+<input id='pw' type="password" placeholder='Password'  onClick={changeInput}/>
 <span id='forgotPassword'>
     <span><Link to="/fp">Forgot password?</Link></span>
 </span>
-<button onClick={()=>navigate('/home')}>
+<button onClick={isValid}>
     next
     </button>
 <Link to="/signup">
@@ -61,6 +110,14 @@ display:flex ;
 flex-direction:column ;
 align-items:center ;
 
+.redded{
+    border-bottom:2px solid red ;
+    color:red ;
+    content:"" ;
+    &::placeholder{
+        color: red;
+    }
+}
 #hero-text{
     width:400px ;
     text-align:center ;
